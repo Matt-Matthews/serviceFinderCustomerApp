@@ -86,7 +86,7 @@ export default function Map({navigation}) {
           customMapStyle={mapStyles}
       >
         {servitorData.length!==0&&servitorData.map((data,index)=>{
-          return <Marker key={index} onPress={()=>viewProfile(data)} coordinate={{latitude: data.location.latitude, longitude: data.location.longitude,}}>
+          return <Marker style={{width: Dimensions.get('window').width* 0.45}} key={index} onPress={()=>viewProfile(data)} coordinate={{latitude: data.location.latitude, longitude: data.location.longitude,}}>
           <CustomeMarker data={data} isOnline={true} />
         </Marker>
         })

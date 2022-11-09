@@ -20,7 +20,7 @@ import CustomeBtn from '../components/CustomeBtn';
 import CustomInput from '../components/CustomInput';
 import  {auth, firestore}  from '../config/firebase';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {collection, addDoc } from "firebase/firestore";
+import {collection, addDoc, GeoPoint } from "firebase/firestore";
 import * as Location from 'expo-location';
 
 
@@ -33,7 +33,7 @@ const SignUp = ({navigation}) => {
   const [password,setPassword] = useState('');
   const [confPassword,setConfPassword] = useState('');
   const [isLoading,setIsLoading] = useState(false);
-  const [currLocation,setLocation] = useState({latitude: -23.9168558,longitude: 29.4576678})
+  const [currLocation,setLocation] = useState(new GeoPoint(-23.9168558, 29.4576678))
 
 
   React.useEffect(() => {
@@ -46,7 +46,9 @@ const SignUp = ({navigation}) => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      
+      let temp = new GeoPoint(location.coords.latitude, location.coords.longitude);
+      setLocation(temp);
     })();
   }, []);
 
